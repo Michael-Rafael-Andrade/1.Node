@@ -3,20 +3,30 @@ const http = require('node:http');
 const hostname = '127.0.0.1';
 const porta = 3000;
 let contagem_visitas = 0;
-const data_atual = new Date(Date.now());
+// const data_atual = new Date(Date.now());
+// const horas = data_atual.getHours();
+// const minutos = data_atual.getMinutes();
+// const segundos = data_atual.getSeconds();
 
 const server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/html');
 
+    const data_atual = new Date(Date.now());
+    const horas = data_atual.getHours();
+    const minutos = data_atual.getMinutes();
+    const segundos = data_atual.getSeconds();
+
+
+
     contagem_visitas++;
 
-// comentario: obter data atual
+    // comentario: obter data atual
     // const data_atual = new Date(Date.now());
-// retorna string com data formatada para o formato brasileiro    
+    // retorna string com data formatada para o formato brasileiro    
     const data_formatada = data_atual.toLocaleDateString();
-    var resposta = 
-    `<html>
+    var resposta =
+        `<html>
         <head>
             <meta charset="utf-8">
             <title>Olá Mundo HTML</title>
@@ -28,6 +38,7 @@ const server = http.createServer((req, res) => {
        
             <!-- retorna string com data formatada para o formato brasileiro -->
             Dia e Hora = ` + data_formatada + `
+            - ` + horas + ` : ` + minutos + ` : ` + segundos + `.
         </body>
     </html>`
 
