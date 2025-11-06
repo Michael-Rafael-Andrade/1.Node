@@ -27,7 +27,7 @@ function paginaPrincipal(req, res) {
     res.end(
         `<html>
             <head>
-                <meta charset="utf-8" />
+                <meta charset="utf-8" />    
                 <title>Página Principal</title>
             </head>
             <body>
