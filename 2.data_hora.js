@@ -93,7 +93,7 @@ function paginaData(req, res, dia, mes, ano) {
             </head>
             <body>
                 <h1>Página para exibir a data atual.</h1>
-                <p>Data atual: ` +dia+'/'+(mes + 1)+'/'+ano+`</p>
+                <p>Data atual: ${dia}/${(mes+1)}/${ano}</p>
             </body>
         </html>`
     );
@@ -111,7 +111,7 @@ function paginaHora(req, res, hora_atual) {
             </head>
             <body>
                 <h1>Página para exibir a hora atual.</h1>
-                <p>Hora atual: ` + hora_atual + `</p>
+                <p>Hora atual:  ${hora_atual}</p>
             </body>
         </html>`
     );
@@ -129,7 +129,7 @@ function paginaDataHora(req, res, dia, mes, ano, hora_atual) {
             </head>
             <body>
                 <h1>Página para exibir a data e hora atual.</h1>
-                <p>Data e hora atual: `+dia+'/'+(mes+1)+'/'+ano+' - '+hora_atual+` </p>
+                <p>Data e hora atual: ${dia}/${(mes+1)}/${ano} - ${hora_atual} </p>
             </body>
         </html>`
     );
