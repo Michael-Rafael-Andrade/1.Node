@@ -3,15 +3,49 @@ const http = require('node:http');
 const hostname = '127.0.0.1';
 const porta = 3000;
 
+// // // const data_atual = new Date(Date.now());
+// const data_atual = new Date(Date.now()).toLocaleDateString();
+// // const horas = data_atual.getHours();
+// const hora_atual = data_atual.toLocaleTimeString();
+// // // const minutos = data_atual.getMinutes();
+// const data_hora = {
+//     data_atual, hora_atual
+// }
+// // const segundos = data_atual.getSeconds();
+
 const server = http.createServer((req, res) => {
+    // const data_atual = new Date(Date.now());
+    const data_atual = new Date(Date.now());
+    // capturar somente o dia 
+    const dia = data_atual.getDate();
+    // capturar somente o mês
+    const mes = data_atual.getMonth();
+    // capturar somente o ano
+    const ano = data_atual.getFullYear();
+
+    // const horas = data_atual.getHours();
+    const opcoes_hora = {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false // Força o formato 24 horas
+    }
+
+    const hora_atual = data_atual.toLocaleTimeString('pt-br', opcoes_hora);
+    // const minutos = data_atual.getMinutes();
+    const data_hora = {
+        data_atual, hora_atual
+    }
+
+
     if (req.url === '/') // Requisição página principal
         paginaPrincipal(req, res);
     else if (req.url === '/data')  // Requisição página /data
-        paginaData(req, res)
+        paginaData(req, res, dia, mes, ano);
     else if (req.url === '/hora') // Requisição página /hora
-        paginaHora(req, res)
+        paginaHora(req, res, hora_atual)
     else if (req.url === '/dataHora') // Requisição página /dataHora
-        paginaDataHora(req, res)
+        paginaDataHora(req, res, dia, mes, ano, hora_atual)
     else {
         // Código 404 indica erro (recurso não localizado)
         res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
@@ -26,7 +60,7 @@ server.listen(porta, hostname, () => {
 
 function paginaPrincipal(req, res) {
     // Prepara o cabeçalho da resposta
-    res.writeHead(200, { ' Content-Type': 'text/html; charset=utf-8' })
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
     // Chama a função que finaliza a conexão, enviando a resposta
     res.end(
         `
@@ -47,7 +81,7 @@ function paginaPrincipal(req, res) {
     );
 }
 
-function paginaData(req, res) {
+function paginaData(req, res, dia, mes, ano) {
     // prepara o cabeçalho da resposta
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     // chama a função que finaliza a conexão, enviando a resposta
@@ -59,13 +93,13 @@ function paginaData(req, res) {
             </head>
             <body>
                 <h1>Página para exibir a data atual.</h1>
-                <p>Data atual: </p>
+                <p>Data atual: ` +dia+'/'+(mes + 1)+'/'+ano+`</p>
             </body>
         </html>`
     );
 }
 
-function paginaHora(req, res) {
+function paginaHora(req, res, hora_atual) {
     // prepara o cabeçalho da resposta
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     // chama a função que finaliza a conexão, enviando a resposta
@@ -77,13 +111,13 @@ function paginaHora(req, res) {
             </head>
             <body>
                 <h1>Página para exibir a hora atual.</h1>
-                <p>Hora atual: </p>
+                <p>Hora atual: ` + hora_atual + `</p>
             </body>
         </html>`
     );
 }
 
-function paginaDataHora(req, res) {
+function paginaDataHora(req, res, dia, mes, ano, hora_atual) {
     // prepara o cabeçalho da resposta
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     // chama a função que finaliza a conexão, enviando a resposta
@@ -95,7 +129,7 @@ function paginaDataHora(req, res) {
             </head>
             <body>
                 <h1>Página para exibir a data e hora atual.</h1>
-                <p>Data e hora atual: </p>
+                <p>Data e hora atual: `+dia+'/'+(mes+1)+'/'+ano+' - '+hora_atual+` </p>
             </body>
         </html>`
     );
