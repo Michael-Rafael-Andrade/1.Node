@@ -5,7 +5,7 @@ const hostname = '127.0.0.1';
 const porta = 3000;
 
 const server = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8'});
+    res.writeHead(200, { "Content-Type": "text/plain; charset='utf-8'"});
 
     //processando os dados que foram enviados via método GET
     let parametros = new url.URLSearchParams(req.url);
