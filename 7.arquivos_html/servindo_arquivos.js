@@ -1,10 +1,10 @@
 const http = require('node:http');
-const url = require('node:url');
+const fs = require('node:fs');
 const hostname = '127.0.0.1';
 const porta = 3000;
 
 const server = http.createServer((req, res) => {
-    if (req.url == "/"){
+    if (req.url === "/"){
         // requisição página principal
         paginaPrincipal(req, res);
     }
@@ -43,6 +43,6 @@ function paginaSobre(req, res){
         res.write(html);
         res.end();
     } catch(erro){
-
+        console.error("Houve o seguinte erro ao tentar acessar o arquivo: " + erro);
     }
 }
